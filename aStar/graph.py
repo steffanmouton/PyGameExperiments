@@ -30,11 +30,11 @@ def gen_nodes(size):
 class Node:
     '''Contains data.'''
     def __init__(self, position = [0,0], value = 0):
-        self._data = value
-        self._pos = position
+        self.data = value
+        self.pos = position
         self.fScore = 0
         self.gScore = 0
-        self.hSCore = 0
+        self.hScore = 0
 
 class Edge:
     '''Connection between two nodes. Takes in parameters of two points to be connected.'''
@@ -55,6 +55,7 @@ class Graph:
         self._edges = edges_param
         if not self.edges:
             self.set_edges(gen_edges(self))
+        self.currentNode = _nodes[0]
 
     def adjacent_edges(self, n):
         '''Takes in a node, returns a list of edges connected to itself'''
@@ -65,6 +66,21 @@ class Graph:
                 adj_edge_list.append(e)
         
         return adj_edge_list
+
+    def adjacent_nodes(self, this_node):
+        connected_edges = adjacent_edges(n)
+        nbrs = []
+
+        for e in connected_edges:
+            for n in e.nodes:
+                if n == this_node:
+                    continue
+                if n in nbrs:
+                    continue
+                nbrs.append(n)
+                
+        return nbrs
+
 
     def render(self, game):
         for n in self.nodes:
@@ -85,3 +101,5 @@ class Graph:
     
     def set_edges(self, e):
         self._edges = e
+
+    
