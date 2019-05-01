@@ -29,7 +29,7 @@ def a_star(graph, goal, heuristic = manhattan):
     closedNodes = []
     discoveredNodes = [graph.currentNode]
 
-    while discoveredNodes.length() > 0:
+    while discoveredNodes.__len__ > 0:
         discoveredNodes.sort(fScore) # TODO FIX THIS
         current = discoveredNodes[0]
         if current == goal:
@@ -39,12 +39,12 @@ def a_star(graph, goal, heuristic = manhattan):
         closedNodes.append(current)
 
         for n in graph.adjacent_nodes(current):
-            if n in closedNodes():
+            if n in closedNodes:
                 continue
 
             tent_gScore = current.gScore + find_distance(current, n)
 
-            if n not in discoveredNodes():
+            if n not in discoveredNodes:
                 discoveredNodes.append()
             elif tent_gScore >= n.gScore:
                 continue

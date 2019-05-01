@@ -1,4 +1,3 @@
-import gameObject
 import pygame
 import constants
 import main as Main

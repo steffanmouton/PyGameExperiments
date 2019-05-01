@@ -7,11 +7,7 @@ def main():
     '''main execution func'''
     game = Game("game")
 
-    game.gameObjects.append(agent.Agent([100, 500], vel = (1.0,-1.0)))
     
-    game.gameObjects.append(agent.Agent([600, 100], col = constants.BLUE))
-
-    game.gameObjects[0].setTarget(game.gameObjects[1])
 
     #add the gameObjects here
     if game._startup():#if the game starts up correctly

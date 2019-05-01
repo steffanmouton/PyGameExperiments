@@ -32,6 +32,7 @@ class Node:
     def __init__(self, position = [0,0], value = 0):
         self.data = value
         self.pos = position
+        self.parent = None
         self.fScore = 0
         self.gScore = 0
         self.hScore = 0
@@ -78,9 +79,8 @@ class Graph:
                 if n in nbrs:
                     continue
                 nbrs.append(n)
-                
-        return nbrs
 
+        return nbrs
 
     def render(self, game):
         for n in self.nodes:
@@ -94,7 +94,7 @@ class Graph:
     
     def set_nodes(self, n):
         self._nodes = n
-       
+    
     @property
     def edges(self):
         return self._edges
