@@ -1,7 +1,6 @@
 import math
 from game import *
-from gameObject import *
-from graphObject import *
+from visualnode import *
 from lineObject import *
 
 def find_distance(a, b):
@@ -56,7 +55,7 @@ class Graph:
         self._edges = edges_param
         if not self.edges:
             self.set_edges(gen_edges(self))
-        self.currentNode = _nodes[0]
+        self.currentNode = self._nodes[0]
 
     def adjacent_edges(self, n):
         '''Takes in a node, returns a list of edges connected to itself'''
@@ -84,7 +83,7 @@ class Graph:
 
     def render(self, game):
         for n in self.nodes:
-            game.gameObjects.append(GraphObject(n._data, n._pos))
+            game.gameObjects.append(VisualNode(n._data, n._pos))
         for e in self.edges:
             game.gameObjects.append(LineObject(1, e._points))
 

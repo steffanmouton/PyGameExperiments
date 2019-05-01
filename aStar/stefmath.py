@@ -25,12 +25,16 @@ def move_agent(ag, dt):
 def manhattan(a, b):
     return a + b
 
+def get_fScore(node):
+    ''' Returns the fScore from a given Node '''
+    return node.fScore
+
 def a_star(graph, goal, heuristic = manhattan):
     closedNodes = []
     discoveredNodes = [graph.currentNode]
 
     while discoveredNodes.__len__ > 0:
-        discoveredNodes.sort(fScore) # TODO FIX THIS
+        discoveredNodes.sort(get_fScore) # TODO FIX THIS
         current = discoveredNodes[0]
         if current == goal:
             return
