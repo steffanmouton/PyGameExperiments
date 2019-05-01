@@ -23,7 +23,10 @@ def move_agent(ag, dt):
     ag.pos = [ag.pos[1] + (ag.curVelocity[0] * dt), ag.pos[1] + (ag.curVelocity[1] * dt)]
 
 def manhattan(a, b):
-    return a + b
+    ''' Returns the manhattan distance between two given points'''
+    distanceX = abs(10*(b[0] - a[0]))
+    distanceY = abs(10*(b[1] - a[1]))
+    return distanceX + distanceY
 
 def get_fScore(node):
     ''' Returns the fScore from a given Node '''
