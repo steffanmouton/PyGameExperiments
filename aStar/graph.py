@@ -4,27 +4,30 @@ from visualnode import *
 from lineObject import *
 
 def find_distance(a, b):
-        sum_under_root = 0.0
-        for i in zip(a, b):
-            sum_under_root += pow(b[i]-a[i], 2)
-        return (math.sqrt(sum_under_root))
-          
+        xLeg = b[0] - a[0]
+        yLeg = b[1] - a[1]
 
-def gen_edges(graph):
+        return math.sqrt(float(xLeg**2) + float(yLeg**2))
+
+def gen_nbr_edges(nodes):
     '''Takes in a graph. Generates edges connecting all nodes. Return a list of these edges.'''
     edgeslist = []
-    for node_alpha in graph.nodes:
-        for node_beta in graph.nodes:
+    for node_alpha in nodes:
+        for node_beta in nodes:
             if node_alpha == node_beta:
                 continue
-            edgeslist.append(Edge(node_alpha, node_beta))
+            if find_distance(node_alpha.pos, node_beta.pos) < 1.42:
+                edgeslist.append(Edge(node_alpha, node_beta))
     return edgeslist
 
 def gen_nodes(size):
     node_list = []
+    count = 1
     for i in range(0,size):
         for j in range(0,size):
-            node_list.append((i,j))
+            node_list.append(Node((i,j), count))
+            count += 1
+    return node_list
 
 class Node:
     '''Contains data.'''
@@ -50,11 +53,9 @@ class Edge:
 
 class Graph:
     '''Take in arguments: nodes and edges''' 
-    def __init__(self, nodes_param, edges_param = None, ):
+    def __init__(self, nodes_param, edges_param = None):
         self._nodes = nodes_param
         self._edges = edges_param
-        if not self.edges:
-            self.set_edges(gen_edges(self))
         self.currentNode = self._nodes[0]
 
     def adjacent_edges(self, n):
@@ -83,7 +84,7 @@ class Graph:
 
     def render(self, game):
         for n in self.nodes:
-            game.gameObjects.append(VisualNode(n._data, n._pos))
+            game.gameObjects.append(VisualNode(n.data, n.pos))
         for e in self.edges:
             game.gameObjects.append(LineObject(1, e._points))
 
