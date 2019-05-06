@@ -2,10 +2,9 @@ import math
 
 def find_distance(a, b):
     '''Returns the distance between two points by pythagorean theorum.'''
-    if a is tuple and b is tuple:
-        alpha = (float(a[0]), float(a[1]))
-        beta = (float(b[0]), float(b[1]))
-        return float(abs(math.sqrt(pow(beta[0]-alpha[0], 2) + pow(beta[1]-alpha[1], 2))))
+    alpha = (float(a[0]), float(a[1]))
+    beta = (float(b[0]), float(b[1]))
+    return float(abs(math.sqrt(pow(beta[0]-alpha[0], 2) + pow(beta[1]-alpha[1], 2))))
 
 def find_vector_from(a, b):
     return (b[0] - a[0], b[1] - a[1])
@@ -32,16 +31,26 @@ def get_fScore(node):
     ''' Returns the fScore from a given Node '''
     return node.fScore
 
-def a_star(graph, goal, heuristic = manhattan):
+def aStar_path(start, goal):
+    fullPath = []
+    current = goal
+    while current != start:
+        fullPath.append(current)
+        current = current.parent
+
+    return fullPath.reverse()
+
+def aStar(graph, goal, heuristic = manhattan):
     closedNodes = []
+    start = graph.currentNode
     discoveredNodes = [graph.currentNode]
 
-    while discoveredNodes.__len__ > 0:
-        discoveredNodes.sort(get_fScore) # TODO FIX THIS
+    while len(discoveredNodes) > 0:
+        discoveredNodes.sort(lambda Node : Node.fScore)
         current = discoveredNodes[0]
         if current == goal:
             return
-                
+        
         discoveredNodes.remove(current)
         closedNodes.append(current)
 
@@ -59,3 +68,10 @@ def a_star(graph, goal, heuristic = manhattan):
             n.parent = current
             n.gScore = tent_gScore
             n.fScore = n.gScore + heuristic(n, goal)
+
+    return aStar_path(start, goal)
+
+def click_check(mousePosition, item):
+    if item.clickable:
+        return item.is_point_inside(mousePosition)
+    return False

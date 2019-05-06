@@ -17,8 +17,11 @@ def gen_nbr_edges(nodes):
             if node_alpha == node_beta:
                 continue
             if find_distance(node_alpha.pos, node_beta.pos) < 1.42:
+                if Edge(node_alpha, node_beta) in edgeslist or Edge(node_beta, node_alpha) in edgeslist:
+                    continue
                 edgeslist.append(Edge(node_alpha, node_beta))
     return edgeslist
+    # Need to overload comparison operator for edges
 
 def gen_nodes(size):
     node_list = []
@@ -47,6 +50,9 @@ class Edge:
         if relation:
             self._relation = relation(alpha,beta)
     
+    def __eq__(self, other):
+        return self.points == other.points
+    
     @property
     def points(self):
         return self._points
@@ -56,6 +62,9 @@ class Graph:
     def __init__(self, nodes_param, edges_param = None):
         self._nodes = nodes_param
         self._edges = edges_param
+        if self._nodes is None:
+            return
+        
         self.currentNode = self._nodes[0]
 
     def adjacent_edges(self, n):
@@ -69,7 +78,8 @@ class Graph:
         return adj_edge_list
 
     def adjacent_nodes(self, this_node):
-        connected_edges = adjacent_edges(n)
+        '''Takes in a node, returns a list of neighbouring nodes'''
+        connected_edges = self.adjacent_edges(this_node)
         nbrs = []
 
         for e in connected_edges:
