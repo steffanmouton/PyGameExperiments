@@ -112,3 +112,6 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+aStar/.idea/encodings.xml
+aStar/.idea/vcs.xml
+aStar/.idea/workspace.xml
