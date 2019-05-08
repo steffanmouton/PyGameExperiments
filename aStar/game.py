@@ -33,24 +33,22 @@ class Game(object):
         self._deltatime = seconds / 1000.0
         self._playtime += self._deltatime
         self._events = pygame.event.get()
-        
-        #  Mouse Clicking
-        m1, m2, m3 = pygame.mouse.get_pressed()
-        if m1 or m2 or m3:
-            mousePos = pygame.mouse.get_pos()
-            for go in self.gameObjects:
-                if stefmath.click_check(mousePos, go):
-                    go.onClick()
-                    break
+
+
+        # #  Mouse Clicking
+        # m1, m2, m3 = pygame.mouse.get_pressed()
+        # if m1 or m2 or m3:
+        #     mousePos = pygame.mouse.get_pos()
+        #     for go in self.gameObjects:
+        #         if stefmath.click_check(mousePos, go):
+        #             go.onClick()
+        #             break
 
         for event in self._events:
             if event.type == pygame.KEYDOWN:
                 keystate = pygame.key.get_pressed()
                 if keystate[pygame.constants.K_ESCAPE]:
                     pygame.quit()
-                if keystate[pygame.constants.K_SPACE]:
-                    ''' game.currentPath = stefmath.aStar(chart, ) '''
-                    #  TODO Make this work
             if event.type == pygame.constants.QUIT:
                 pygame.quit()
         for go in self.gameObjects:
