@@ -5,10 +5,10 @@ from constants import *
 import stefmath
 
 class Game(object):
-    '''pygame object'''
+    """pygame object"""
 
     def __init__(self, name):
-        '''abc'''
+        """abc"""
         self._name = name
         pygame.init()
         self._screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))        
@@ -28,7 +28,7 @@ class Game(object):
         return True
 
     def _update(self):
-        '''input and time'''
+        """input and time"""
         seconds = self._clock.tick(self._fps)
         self._deltatime = seconds / 1000.0
         self._playtime += self._deltatime
@@ -50,7 +50,7 @@ class Game(object):
                     pygame.quit()
                 if keystate[pygame.constants.K_SPACE]:
                     ''' game.currentPath = stefmath.aStar(chart, ) '''
-                    #  TODO FIX THIS
+                    #  TODO Make this work
             if event.type == pygame.constants.QUIT:
                 pygame.quit()
         for go in self.gameObjects:
@@ -58,7 +58,7 @@ class Game(object):
         return True
 
     def _draw(self):
-        '''need docstring'''
+        """Causes each game object to call its own Draw function"""
         self.draw_text("FPS: {:6.3}{}PLAYTIME: {:6.3} SECONDS".format(
             self._clock.get_fps(), " " * 5, self._playtime))
         for go in self.gameObjects:
@@ -67,7 +67,7 @@ class Game(object):
         self._screen.blit(self._background, (0, 0))
 
     def _shutdown(self):
-        '''shutdown the game properly'''
+        """shutdown the game properly"""
         pygame.quit()
 
     def draw_text(self, text):

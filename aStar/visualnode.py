@@ -4,14 +4,16 @@ import main as Main
 import stefmath
 from enum import Enum
 
+
 class State(Enum):
     Normal = 1
     Start = 2
     Path = 3
     Goal = 4
 
+
 class VisualNode:
-    def __init__(self, value, position = [0,0]):
+    def __init__(self, value, position=(0, 0)):
         self.val = value
         self.pos = position
         self.color = constants.BLUE
@@ -29,7 +31,6 @@ class VisualNode:
             self.color = constants.YELLOW
         if self.curState == 4:
             self.color = constants.RED
-
 
     def draw(self, screen):
 
@@ -51,7 +52,3 @@ class VisualNode:
             self.curState = 4
         if m3:
             self.curState = 2
-
-
-if __name__ == "__main__":
-    Main.main()

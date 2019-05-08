@@ -1,6 +1,6 @@
 import pygame
 import constants
-import main as Main
+
 
 class LineObject:
     def __init__(self, value, edge):
@@ -11,16 +11,13 @@ class LineObject:
         self.clickable = False
 
     def update(self, dt):
-        ''' For Inheritence'''
+        """ For Inheritance"""
 
     def draw(self, screen):
 
         pygame.draw.line(
-        screen, 
-        self.color, 
-        [self.edges[0].pos[0]*self.scale + self.scale, self.edges[0].pos[1]*self.scale + self.scale], 
-        [self.edges[1].pos[0]*self.scale + self.scale, self.edges[1].pos[1]*self.scale + self.scale]
+            screen,
+            self.color,
+            [self.edges[0].pos[0]*self.scale + self.scale, self.edges[0].pos[1]*self.scale + self.scale],
+            [self.edges[1].pos[0]*self.scale + self.scale, self.edges[1].pos[1]*self.scale + self.scale]
         )
-
-if __name__ == "__main__":
-    Main.main()

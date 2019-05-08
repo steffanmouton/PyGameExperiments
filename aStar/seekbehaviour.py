@@ -1,5 +1,6 @@
 import stefmath
 
+
 def seek(seeker):
     if seeker.target is None:
         return

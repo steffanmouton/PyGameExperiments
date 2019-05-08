@@ -3,14 +3,16 @@ from game import *
 from visualnode import *
 from lineObject import *
 
+
 def find_distance(a, b):
         xLeg = b[0] - a[0]
         yLeg = b[1] - a[1]
 
         return math.sqrt(float(xLeg**2) + float(yLeg**2))
 
+
 def gen_nbr_edges(nodes):
-    '''Takes in a graph. Generates edges connecting all nodes. Return a list of these edges.'''
+    """Takes in a graph. Generates edges connecting all nodes. Return a list of these edges."""
     edgeslist = []
     for node_alpha in nodes:
         for node_beta in nodes:
@@ -23,18 +25,20 @@ def gen_nbr_edges(nodes):
     return edgeslist
     # Need to overload comparison operator for edges
 
+
 def gen_nodes(size):
     node_list = []
     count = 1
-    for i in range(0,size):
-        for j in range(0,size):
-            node_list.append(Node((i,j), count))
+    for i in range(0, size):
+        for j in range(0, size):
+            node_list.append(Node([i, j], count))
             count += 1
     return node_list
 
+
 class Node:
-    '''Contains data.'''
-    def __init__(self, position = [0,0], value = 0):
+    """Contains data."""
+    def __init__(self, position=[0, 0], value=0):
         self.data = value
         self.pos = position
         self.parent = None
@@ -42,8 +46,9 @@ class Node:
         self.gScore = 0
         self.hScore = 0
 
+
 class Edge:
-    '''Connection between two nodes. Takes in parameters of two points to be connected.'''
+    """Connection between two nodes. Takes in parameters of two points to be connected."""
     def __init__(self, alpha, beta, relation = None):
         self._points = (alpha, beta)
 
@@ -57,8 +62,9 @@ class Edge:
     def points(self):
         return self._points
 
+
 class Graph:
-    '''Take in arguments: nodes and edges''' 
+    """Take in arguments: nodes and edges"""
     def __init__(self, nodes_param, edges_param = None):
         self._nodes = nodes_param
         self._edges = edges_param
@@ -68,7 +74,7 @@ class Graph:
         self.currentNode = self._nodes[0]
 
     def adjacent_edges(self, n):
-        '''Takes in a node, returns a list of edges connected to itself'''
+        """Takes in a node, returns a list of edges connected to itself"""
         adj_edge_list = []
 
         for e in self.edges:
@@ -78,7 +84,7 @@ class Graph:
         return adj_edge_list
 
     def adjacent_nodes(self, this_node):
-        '''Takes in a node, returns a list of neighbouring nodes'''
+        """Takes in a node, returns a list of neighbouring nodes"""
         connected_edges = self.adjacent_edges(this_node)
         nbrs = []
 
@@ -111,5 +117,3 @@ class Graph:
     
     def set_edges(self, e):
         self._edges = e
-
-    
