@@ -14,8 +14,6 @@ def main():
     g1 = chart.nodes[8]
     test = stefmath.aStar(chart, g1, stefmath.manhattan)
 
-    currentPath = None
-
     # add the gameObjects here
     if game._startup():  # if the game starts up correctly
         while game._update():  # update the game if the game updates then

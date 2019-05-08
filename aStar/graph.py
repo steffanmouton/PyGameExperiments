@@ -45,6 +45,7 @@ class Node:
         self.fScore = 0
         self.gScore = 0
         self.hScore = 0
+        self.isWalkable = 1
 
     def __eq__(self, other):
         return self.data == other.data

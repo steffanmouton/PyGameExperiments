@@ -41,7 +41,9 @@ def aStar_path(start, goal):
         fullPath.append(current)
         current = current.parent
 
-    return fullPath.reverse()
+    fullPath.append(current)
+    fullPath.reverse()
+    return fullPath
 
 
 def aStar(graph, goal, heuristic=manhattan):
@@ -62,7 +64,9 @@ def aStar(graph, goal, heuristic=manhattan):
         for n in graph.adjacent_nodes(current):
             if n in closedNodes:
                 continue
-
+            if not n.isWalkable:
+                closedNodes.append(n)
+                continue
             tent_gScore = current.gScore + find_distance(current.pos, n.pos)
 
             if n not in discoveredNodes:

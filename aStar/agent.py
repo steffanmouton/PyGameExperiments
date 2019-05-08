@@ -1,6 +1,5 @@
 import pygame
 import constants
-import main as Main
 import seekbehaviour
 import stefmath
 
