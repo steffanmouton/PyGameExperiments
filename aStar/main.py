@@ -1,15 +1,18 @@
 from game import *
 import graph
+import stefmath
 
 
 def main():
     """main execution func"""
     game = Game("game")
 
-    nodes = graph.gen_nodes(10)
+    nodes = graph.gen_nodes(3)
     edges = graph.gen_nbr_edges(nodes)
     chart = graph.Graph(nodes, edges)
     chart.render(game)
+    g1 = chart.nodes[8]
+    test = stefmath.aStar(chart, g1, stefmath.manhattan)
 
     currentPath = None
 

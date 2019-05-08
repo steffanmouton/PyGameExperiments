@@ -46,10 +46,13 @@ class Node:
         self.gScore = 0
         self.hScore = 0
 
+    def __eq__(self, other):
+        return self.data == other.data
+
 
 class Edge:
     """Connection between two nodes. Takes in parameters of two points to be connected."""
-    def __init__(self, alpha, beta, relation = None):
+    def __init__(self, alpha, beta, relation=None):
         self._points = (alpha, beta)
 
         if relation:
@@ -65,7 +68,7 @@ class Edge:
 
 class Graph:
     """Take in arguments: nodes and edges"""
-    def __init__(self, nodes_param, edges_param = None):
+    def __init__(self, nodes_param, edges_param=None):
         self._nodes = nodes_param
         self._edges = edges_param
         if self._nodes is None:
@@ -89,7 +92,7 @@ class Graph:
         nbrs = []
 
         for e in connected_edges:
-            for n in e.nodes:
+            for n in e.points:
                 if n == this_node:
                     continue
                 if n in nbrs:
