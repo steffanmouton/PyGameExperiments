@@ -21,6 +21,15 @@ def normalize(v):
     return [v[0] / mag, v[1] / mag]
 
 
+def rotate_around_point(point, radians, origin=(0, 0)):
+    x, y = point
+    originX, originY = origin
+    newX = originX + math.cos(radians) * (x-originX) + math.sin(radians) * (y-originY)
+    newY = originY + math.sin(radians) * (x-originX) + math.cos(radians) * (y-originY)
+
+    return [newX, newY]
+
+
 def move_agent(ag, dt):
     ag.acceleration = [ag.force[0]/ag.mass, ag.force[1]/ag.mass]
     ag.curVelocity = [ag.curVelocity[0] + (ag.acceleration[0] * dt), ag.curVelocity[1] + (ag.acceleration[1] * dt)]

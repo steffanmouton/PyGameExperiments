@@ -7,6 +7,18 @@ def main():
     """main execution func"""
     game = Game("game")
 
+    # add the gameObjects here
+    if game._startup():  # if the game starts up correctly
+        while game._update():  # update the game if the game updates then
+            game._draw()  # draw elements from the game
+        game._shutdown()
+
+
+if __name__ == "__main__":
+    main()
+
+
+""" Test for Astar
     nodes = graph.gen_nodes(9)
     edges = graph.gen_nbr_edges(nodes)
     chart = graph.Graph(nodes, edges)
@@ -33,13 +45,4 @@ def main():
     # Printing to console to check test
     for node in test:
         print(node.pos)
-
-    # add the gameObjects here
-    if game._startup():  # if the game starts up correctly
-        while game._update():  # update the game if the game updates then
-            game._draw()  # draw elements from the game
-        game._shutdown()
-
-
-if __name__ == "__main__":
-    main()
+"""

@@ -13,6 +13,8 @@ class Agent:
         self.force = [0, 0]
         self.acceleration = [0, 0]
         self.mass = 1.0
+        self.isPredator = False
+        self.pursuit_circle_radius = 1
 
     def update(self, dt):
         self.addForce(seekbehaviour.seek(self))
@@ -29,3 +31,5 @@ class Agent:
         if v is None:
             return
         self.force = [self.force[0] + v[0], self.force[1] + v[1]]
+
+    def
