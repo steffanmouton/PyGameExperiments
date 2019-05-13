@@ -1,6 +1,5 @@
 import math
 
-
 def find_distance(a, b):
     """Returns the distance between two points by pythagorean theorem."""
     alpha = (float(a[0]), float(a[1]))
@@ -9,19 +8,25 @@ def find_distance(a, b):
 
 
 def find_vector_from(a, b):
+    """Returns the vector originating at point a, reaching point b"""
     return b[0] - a[0], b[1] - a[1]
 
 
 def find_vector_mag(v):
+    """Returns the magnitude of a given vector"""
     return float(math.sqrt(pow(v[0], 2) + pow(v[1], 2)))
 
 
 def normalize(v):
+    """Returns the normalized form of a given vector"""
     mag = find_vector_mag(v)
+    if mag == 0:
+        return [0, 0]
     return [v[0] / mag, v[1] / mag]
 
 
 def rotate_around_point(point, radians, origin=(0, 0)):
+    """Given a point and an origin to rotate around, rotate in radians"""
     x, y = point
     originX, originY = origin
     newX = originX + math.cos(radians) * (x-originX) + math.sin(radians) * (y-originY)
@@ -31,9 +36,10 @@ def rotate_around_point(point, radians, origin=(0, 0)):
 
 
 def move_agent(ag, dt):
-    ag.acceleration = [ag.force[0]/ag.mass, ag.force[1]/ag.mass]
-    ag.curVelocity = [ag.curVelocity[0] + (ag.acceleration[0] * dt), ag.curVelocity[1] + (ag.acceleration[1] * dt)]
-    ag.pos = [ag.pos[1] + (ag.curVelocity[0] * dt), ag.pos[1] + (ag.curVelocity[1] * dt)]
+    """Move the agent based on its own forces being applied, mass, current velocity, and position"""
+    acceleration = [ag.force[0]/ag.mass, ag.force[1]/ag.mass]
+    ag.curVelocity = [ag.curVelocity[0] + (acceleration[0] * dt), ag.curVelocity[1] + (acceleration[1] * dt)]
+    ag.pos = [ag.pos[0] + (ag.curVelocity[0] * dt), ag.pos[1] + (ag.curVelocity[1] * dt)]
 
 
 def manhattan(a, b):
@@ -44,6 +50,7 @@ def manhattan(a, b):
 
 
 def aStar_path(start, goal):
+    """Returns the path from start to goal, as found by aStar function"""
     fullPath = []
     current = goal
     while current != start:
@@ -56,6 +63,7 @@ def aStar_path(start, goal):
 
 
 def aStar(graph, goal, heuristic=manhattan):
+    """A* algorithm. Given graph, goal, and a heuristic to follow, find the best path between two points"""
     closedNodes = []
     start = graph.currentNode
     discoveredNodes = [graph.currentNode]
@@ -86,9 +94,3 @@ def aStar(graph, goal, heuristic=manhattan):
             n.parent = current
             n.gScore = tent_gScore
             n.fScore = n.gScore + heuristic(n.pos, goal.pos)
-
-
-def click_check(mousePosition, item):
-    if item.clickable:
-        return item.is_point_inside(mousePosition)
-    return False

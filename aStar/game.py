@@ -2,7 +2,6 @@
 
 import pygame
 from constants import *
-import stefmath
 
 class Game(object):
     """pygame object"""
@@ -22,6 +21,8 @@ class Game(object):
         self._playtime = 0.0
         self._deltatime = 0.0
         self._fps = 30
+        self.screen_rect = pygame.Rect(SCREEN_HEIGHT, SCREEN_WIDTH, SCREEN_WIDTH, SCREEN_HEIGHT)
+        self.screen_mid = [SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2]
 
     def _startup(self):
         pygame.display.set_caption(self._name)
@@ -34,16 +35,6 @@ class Game(object):
         self._playtime += self._deltatime
         self._events = pygame.event.get()
 
-
-        # #  Mouse Clicking
-        # m1, m2, m3 = pygame.mouse.get_pressed()
-        # if m1 or m2 or m3:
-        #     mousePos = pygame.mouse.get_pos()
-        #     for go in self.gameObjects:
-        #         if stefmath.click_check(mousePos, go):
-        #             go.onClick()
-        #             break
-
         for event in self._events:
             if event.type == pygame.KEYDOWN:
                 keystate = pygame.key.get_pressed()
@@ -51,8 +42,17 @@ class Game(object):
                     pygame.quit()
             if event.type == pygame.constants.QUIT:
                 pygame.quit()
+
         for go in self.gameObjects:
             go.update(self._deltatime)
+            # If position of any game object is outside screen bounds,
+            # set it to middle of screen
+            if go.pos[0] > SCREEN_WIDTH or go.pos[0] < 0:
+                go.pos = self.screen_mid
+                go.resetPhysics()
+            if go.pos[1] > SCREEN_HEIGHT or go.pos[1] < 0:
+                go.pos = self.screen_mid
+                go.resetPhysics()
         return True
 
     def _draw(self):
