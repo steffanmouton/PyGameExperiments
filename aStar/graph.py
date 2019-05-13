@@ -1,14 +1,13 @@
 import math
 from game import *
-from visualnode import *
-from lineObject import *
 
 
 def find_distance(a, b):
-        xLeg = b[0] - a[0]
-        yLeg = b[1] - a[1]
+    """Finds the distance between two nodes inside the graph"""
+    xLeg = b[0] - a[0]
+    yLeg = b[1] - a[1]
 
-        return math.sqrt(float(xLeg**2) + float(yLeg**2))
+    return math.sqrt(float(xLeg**2) + float(yLeg**2))
 
 
 def gen_nbr_edges(nodes):
@@ -27,6 +26,7 @@ def gen_nbr_edges(nodes):
 
 
 def gen_nodes(size):
+    """Generates nodes of a given size, where size is n and number of nodes is nXn"""
     node_list = []
     count = 1
     for i in range(0, size):
@@ -103,10 +103,12 @@ class Graph:
         return nbrs
 
     def render(self, game):
-        for n in self.nodes:
-            game.gameObjects.append(VisualNode(n.data, n.pos))
-        for e in self.edges:
-            game.gameObjects.append(LineObject(1, e._points))
+        # UNUSED IN CURRENT STATE OF CODE
+        # for n in self.nodes:
+        #     game.gameObjects.append(VisualNode(n.data, n.pos))
+        # for e in self.edges:
+        #     game.gameObjects.append(LineObject(1, e._points))
+        return
 
     @property
     def nodes(self):
