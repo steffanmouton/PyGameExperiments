@@ -1,7 +1,6 @@
 from game import *
 import graph
-from agent import *
-
+import stefmath
 
 def main():
     """main execution func"""
@@ -47,13 +46,6 @@ def main():
     CORRECT
     """
     # END OF ASTAR TEST
-
-    # BEGIN STEERING BEHAVIOURS TEST
-    testagent = Agent(position=[500, 500])
-    mouseagent = MouseAgent()
-    testagent.target = mouseagent
-    game.gameObjects.append(testagent)
-    game.gameObjects.append(mouseagent)
 
     # add the gameObjects here
     if game._startup():  # if the game starts up correctly

@@ -45,14 +45,6 @@ class Game(object):
 
         for go in self.gameObjects:
             go.update(self._deltatime)
-            # If position of any game object is outside screen bounds,
-            # set it to middle of screen
-            if go.pos[0] > SCREEN_WIDTH or go.pos[0] < 0:
-                go.pos = self.screen_mid
-                go.resetPhysics()
-            if go.pos[1] > SCREEN_HEIGHT or go.pos[1] < 0:
-                go.pos = self.screen_mid
-                go.resetPhysics()
         return True
 
     def _draw(self):
